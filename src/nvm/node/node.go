@@ -136,7 +136,7 @@ func (s BySemanticVersion) Less(i, j int) bool {
   return v1.GTE(v2)
 }
 
-// Identifies a version as "LTS"
+// isLTS identifies a version as "LTS"
 func isLTS(element map[string]interface{}) bool {
   switch datatype := element["lts"].(type) {
     case bool:
@@ -147,7 +147,7 @@ func isLTS(element map[string]interface{}) bool {
   return false
 }
 
-// Identifies a version as "current"
+// isCurrent identifies a version as "current"
 func isCurrent(element map[string]interface{}) bool {
   if isLTS(element) {
     return false
@@ -164,7 +164,7 @@ func isCurrent(element map[string]interface{}) bool {
   // return version.Major%2 == 1
 }
 
-// Identifies a stable old version.
+// isStable identifies a stable old version.
 func isStable(element map[string]interface{}) bool {
   if isCurrent(element) {
     return false
@@ -179,7 +179,7 @@ func isStable(element map[string]interface{}) bool {
   return version.Minor%2 == 0
 }
 
-// Identifies an unstable old version.
+// isUnstable identifies an unstable old version.
 func isUnstable(element map[string]interface{}) bool {
   if isStable(element) {
     return false
@@ -194,7 +194,7 @@ func isUnstable(element map[string]interface{}) bool {
   return version.Minor%2 != 0
 }
 
-// Retrieve the remotely available versions
+// GetAvailable retrieves the remotely available versions
 func GetAvailable() ([]string, []string, []string, []string, []string, map[string]string) {
   all := make([]string,0)
   lts := make([]string,0)

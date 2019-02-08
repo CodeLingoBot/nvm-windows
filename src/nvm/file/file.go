@@ -10,7 +10,7 @@ import(
   "strings"
 )
 
-// Function courtesy http://stackoverflow.com/users/1129149/swtdrgn
+// Unzip; Function courtesy http://stackoverflow.com/users/1129149/swtdrgn
 func Unzip(src, dest string) error {
   r, err := zip.OpenReader(src)
   if err != nil {

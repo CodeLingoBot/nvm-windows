@@ -643,7 +643,7 @@ func cleanVersion(version string) string {
   return matched
 }
 
-// Given a node.js version, returns the associated npm version
+// getNpmVersion; Given a node.js version, returns the associated npm version
 func getNpmVersion(nodeversion string) string {
   _, _, _, _, _, npm := node.GetAvailable()
   return npm[nodeversion]

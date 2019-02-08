@@ -35,7 +35,7 @@ type Version struct {
   Build []string //No Precendence
 }
 
-// Version to string
+// String; Version to string
 func (v *Version) String() string {
   versionArray := []string{
     strconv.FormatUint(v.Major, 10),
@@ -59,27 +59,27 @@ func (v *Version) String() string {
   return strings.Join(versionArray, "")
 }
 
-// Checks if v is greater than o.
+// GT checks if v is greater than o.
 func (v *Version) GT(o *Version) bool {
   return (v.Compare(o) == 1)
 }
 
-// Checks if v is greater than or equal to o.
+// GTE checks if v is greater than or equal to o.
 func (v *Version) GTE(o *Version) bool {
   return (v.Compare(o) >= 0)
 }
 
-// Checks if v is less than o.
+// LT checks if v is less than o.
 func (v *Version) LT(o *Version) bool {
   return (v.Compare(o) == -1)
 }
 
-// Checks if v is less than or equal to o.
+// LTE checks if v is less than or equal to o.
 func (v *Version) LTE(o *Version) bool {
   return (v.Compare(o) <= 0)
 }
 
-// Compares Versions v to o:
+// Compare versions v to o:
 // -1 == v is less than o
 // 0 == v is equal to o
 // 1 == v is greater than o
@@ -138,7 +138,7 @@ func (v *Version) Compare(o *Version) int {
   }
 }
 
-// Validates v and returns error in case
+// Validate; v and returns error in case
 func (v *Version) Validate() error {
   // Major, Minor, Patch already validated using uint64
 
@@ -169,12 +169,12 @@ func (v *Version) Validate() error {
   return nil
 }
 
-// Alias for Parse, parses version string and returns a validated Version or error
+// New alias for Parse, parses version string and returns a validated Version or error
 func New(s string) (*Version, error) {
   return Parse(s)
 }
 
-// Parses version string and returns a validated Version or error
+// Parse; version string and returns a validated Version or error
 func Parse(s string) (*Version, error) {
   if len(s) == 0 {
     return nil, errors.New("Version string empty")
@@ -289,7 +289,7 @@ type PRVersion struct {
   IsNum      bool
 }
 
-// Creates a new valid prerelease version
+// NewPRVersion creates a new valid prerelease version
 func NewPRVersion(s string) (*PRVersion, error) {
   if len(s) == 0 {
     return nil, errors.New("Prerelease is empty")
@@ -316,12 +316,12 @@ func NewPRVersion(s string) (*PRVersion, error) {
   return v, nil
 }
 
-// Is pre release version numeric?
+// IsNumeric; Is pre release version numeric?
 func (v *PRVersion) IsNumeric() bool {
   return v.IsNum
 }
 
-// Compares PreRelease Versions v to o:
+// Compare versions v to o:
 // -1 == v is less than o
 // 0 == v is equal to o
 // 1 == v is greater than o
@@ -349,7 +349,7 @@ func (v *PRVersion) Compare(o *PRVersion) int {
   }
 }
 
-// PreRelease version to string
+// String; version to string
 func (v *PRVersion) String() string {
   if v.IsNum {
     return strconv.FormatUint(v.VersionNum, 10)
@@ -367,7 +367,7 @@ func hasLeadingZeroes(s string) bool {
   return len(s) > 1 && s[0] == '0'
 }
 
-// Creates a new valid build version
+// NewBuildVersion creates a new valid build version
 func NewBuildVersion(s string) (string, error) {
   if len(s) == 0 {
     return "", errors.New("Buildversion is empty")
